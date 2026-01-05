@@ -1,0 +1,111 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap');
+
+:root {
+    --primary: #1a1a1a;
+    --accent: #c5a47e; /* Soft gold/brown */
+    --bg: #ffffff;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --light-gray: #f9f9f9;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-main);
+    background-color: var(--bg);
+}
+
+h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 5%;
+    border-bottom: 1px solid #eee;
+}
+
+.logo { font-size: 1.5rem; font-weight: 700; text-decoration: none; color: var(--primary); }
+
+.nav-links a, .nav-links button {
+    margin-left: 20px;
+    text-decoration: none;
+    color: var(--text-main);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Hero Section */
+.hero {
+    padding: 80px 5%;
+    text-align: center;
+    background-color: var(--light-gray);
+}
+
+.hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+
+/* Book Grid */
+.container { padding: 50px 5%; }
+
+.book-grid {
+    display: grid;
+    gap: 40px;
+    /* Responsive Grid: 1 col mobile, 2 tablet, 4 desktop */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.book-card {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.book-card:hover { transform: translateY(-5px); }
+
+.book-card img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.book-info { margin-top: 15px; }
+.book-author { color: var(--text-muted); font-size: 0.9rem; }
+.book-price { font-weight: 600; margin: 5px 0; }
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover { opacity: 0.8; }
+
+/* Forms */
+.auth-form {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    border: 1px solid #eee;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 50px;
+        }
+        .product-image img { width: 100%; border-radius: 8px; }
+        .product-details h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .price-tag { font-size: 1.5rem; font-weight: 600; color: var(--accent); margin: 20px 0; }
+        @media (max-width: 768px) { .product-container { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo" id="store-name-nav">Store</a>
+        <div id="auth-links"></div>
+    </nav>
+
+    <div class="container">
+        <div class="product-container" id="product-content">
+            <p>Loading book details...</p>
+        </div>
+    </div>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module">
+        import { supabase } from './js/supabase.js';
+        import { initializePayment } from './js/payment.js';
+        import { CLIENT_CONFIG } from './js/config.js';
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookId = urlParams.get('id');
+
+        async function loadProduct() {
+            const { data: book, error } = await supabase
+                .from('books')
+                .select('*')
+                .eq('id', bookId)
+                .single();
+
+            if (error) {
+                document.getElementById('product-content').innerHTML = "<p>Book not found.</p>";
+                return;
+            }
+
+            document.title = `${book.title} | ${CLIENT_CONFIG.STORE_NAME}`;
+            
+            document.getElementById('product-content').innerHTML = `
+                <div class="product-image">
+                    <img src="${book.image_url}" alt="${book.title}">
+                </div>
+                <div class="product-details">
+                    <h1>${book.title}</h1>
+                    <p class="book-author">By ${book.author}</p>
+                    <div class="price-tag">${CLIENT_CONFIG.SYMBOL}${book.price}</div>
+                    <p>${book.description}</p>
+                    <br>
+                    <button id="buy-now-btn" class="btn" style="padding: 15px 40px;">Buy Now</button>
+                </div>
+            `;
+
+            document.getElementById('buy-now-btn').onclick = () => {
+                // Check if user is logged in before allowing purchase
+                supabase.auth.getSession().then(({ data }) => {
+                    if (data.session) {
+                        initializePayment(book);
+                    } else {
+                        alert("Please login to purchase!");
+                        window.location.href = 'login.html';
+                    }
+                });
+            };
+        }
+        loadProduct();
+    </script>
+</body>
+</html>
