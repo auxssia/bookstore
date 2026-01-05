@@ -39,25 +39,24 @@ if (loginForm) {
 
 // Global Auth State UI
 async function updateAuthUI() {
-    const authLinks = document.getElementById('auth-links');
-    if (!authLinks) return;
+    const container = document.getElementById('auth-links-container');
+    if (!container) return;
 
     const { data: { session } } = await supabase.auth.getSession();
 
     if (session) {
-        authLinks.innerHTML = `
-            <span>${session.user.email}</span>
-            <button id="logout-btn" class="nav-link">Logout</button>
+        container.innerHTML = `
+            <div class="action-item">
+                <span>👤 My Account</span>
+                <button id="logout-btn" style="background:none; border:none; cursor:pointer; font-size:12px; margin-left:10px;">(Logout)</button>
+            </div>
         `;
-        document.getElementById('logout-btn').addEventListener('click', async () => {
+        document.getElementById('logout-btn').onclick = async () => {
             await supabase.auth.signOut();
             window.location.reload();
-        });
+        };
     } else {
-        authLinks.innerHTML = `
-            <a href="login.html">Login</a>
-            <a href="signup.html" class="btn">Sign Up</a>
-        `;
+        container.innerHTML = `<a href="login.html" class="action-item">👤 Login / Sign Up</a>`;
     }
 }
 

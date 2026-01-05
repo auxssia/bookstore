@@ -3,27 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Reading Room | Home</title>
+    <title>The Reading Room | Premium Bookstore</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav>
-        <a href="index.html" class="logo" id="store-name-nav">Store</a>
-        <div class="nav-links" id="auth-links">
-            </div>
-    </nav>
 
-    <header class="hero">
-        <h1 id="hero-title">Welcome</h1>
-        <p id="hero-tagline">Loading stories...</p>
+    <div class="top-strip">
+        Free Shipping on orders over ₹999 | Join our Membership for 10% off
+    </div>
+
+    <header>
+        <div class="header-main">
+            <a href="index.html" class="logo">THE READING ROOM</a>
+            
+            <div class="search-container">
+                <input type="text" placeholder="Search by Title, Author, or ISBN...">
+            </div>
+
+            <div class="header-actions">
+                <div id="auth-links-container" class="action-item">
+                    </div>
+                <a href="#" class="action-item">
+                    <span>🛒 Cart (0)</span>
+                </a>
+            </div>
+        </div>
+
+        <nav class="genre-nav">
+            <a href="#">Best Sellers</a>
+            <a href="#">Fiction</a>
+            <a href="#">Non-Fiction</a>
+            <a href="#">Business</a>
+            <a href="#">Children</a>
+            <a href="#">New Arrivals</a>
+        </nav>
     </header>
 
-    <main class="container">
-        <div class="book-grid" id="book-display">
+    <section class="slider-container">
+        <div class="slider">
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1500&q=80');">
+                <div class="slide-content">
+                    <h2>Winter Classics</h2>
+                    <p>Discover the books everyone is talking about.</p>
+                </div>
             </div>
-    </main>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1500&q=80');">
+                <div class="slide-content">
+                    <h2>Knowledge is Power</h2>
+                    <p>Explore our vast collection of Non-Fiction.</p>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1500&q=80');">
+                <div class="slide-content">
+                    <h2>New Arrivals</h2>
+                    <p>The freshest stories, just for you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <h2 class="section-title">Shop by Category</h2>
+    <div class="genre-circles">
+        <div class="genre-card">
+            <div class="circle">📚</div>
+            <p>Fiction</p>
+        </div>
+        <div class="genre-card">
+            <div class="circle">💼</div>
+            <p>Business</p>
+        </div>
+        <div class="genre-card">
+            <div class="circle">🎨</div>
+            <p>Art</p>
+        </div>
+        <div class="genre-card">
+            <div class="circle">🧠</div>
+            <p>Self Help</p>
+        </div>
+        <div class="genre-card">
+            <div class="circle">🧒</div>
+            <p>Kids</p>
+        </div>
+    </div>
+
+    <h2 class="section-title">Trending Now</h2>
+    <main class="book-grid" id="book-display">
+        <div class="book-card">
+            <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=400&q=80" alt="Book">
+            <div class="book-info">
+                <h3>The Great Mystery</h3>
+                <p class="book-author">Author Name</p>
+                <p class="book-price">₹599</p>
+            </div>
+        </div>
+        </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script type="module" src="js/books.js"></script>
+    <script type="module" src="js/auth.js"></script>
 </body>
 </html>
